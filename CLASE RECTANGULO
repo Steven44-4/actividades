@@ -1,0 +1,32 @@
+class Rectangulo:
+    def __init__(self, largo: float, ancho: float):
+        self.__set_dimensiones(largo, ancho)
+    
+    def __set_dimensiones(self, largo: float, ancho: float):
+        if largo <= 0 or ancho <= 0:
+            raise ValueError("Las dimensiones deben ser mayores que cero.")
+        self.__largo = largo
+        self.__ancho = ancho
+    
+    def cambiar_dimensiones(self, nuevo_largo: float, nuevo_ancho: float):
+        """Modifica el largo y el ancho del rectángulo, asegurando que sean valores positivos."""
+        self.__set_dimensiones(nuevo_largo, nuevo_ancho)
+    
+    def calcular_area(self) -> float:
+        """Devuelve el área del rectángulo."""
+        return self.__largo * self.__ancho
+    
+    def calcular_perimetro(self) -> float:
+        """Devuelve el perímetro del rectángulo."""
+        return 2 * (self.__largo + self.__ancho)
+    
+    def obtener_dimensiones(self) -> tuple:
+        """Retorna el largo y el ancho actuales del rectángulo en forma de tupla."""
+        return self.__largo, self.__ancho
+
+# Ejemplo de uso
+rectangulo = Rectangulo(5, 3)
+print(f"Dimensiones actuales: {rectangulo.obtener_dimensiones()}, Área: {rectangulo.calcular_area()}, Perímetro: {rectangulo.calcular_perimetro()}")
+
+rectangulo.cambiar_dimensiones(7, 4)
+print(f"Nuevas dimensiones: {rectangulo.obtener_dimensiones()}, Área: {rectangulo.calcular_area()}, Perímetro: {rectangulo.calcular_perimetro()}")
