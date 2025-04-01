@@ -1,0 +1,34 @@
+class Estudiante:
+    def __init__(self, nombre: str, edad: int):
+        self.__nombre = nombre
+        self.__edad = edad
+        self.__notas = []
+    
+    def agregar_nota(self, nota: float):
+        """Añade una calificación al registro del estudiante, validando que esté entre 0 y 100."""
+        if not (0 <= nota <= 100):
+            raise ValueError("La calificación debe estar en el rango de 0 a 100.")
+        self.__notas.append(nota)
+    
+    def calcular_promedio(self) -> float:
+        """Calcula y devuelve el promedio de las calificaciones del estudiante."""
+        if not self.__notas:
+            return 0.0  # Retorna 0 si no hay calificaciones registradas
+        return sum(self.__notas) / len(self.__notas)
+    
+    def obtener_nombre(self) -> str:
+        """Devuelve el nombre del estudiante."""
+        return self.__nombre
+    
+    def obtener_edad(self) -> int:
+        """Devuelve la edad del estudiante."""
+        return self.__edad
+
+# Ejemplo de uso
+estudiante = Estudiante("Juan Perez", 20)
+print(f"Nombre del estudiante: {estudiante.obtener_nombre()}, Edad: {estudiante.obtener_edad()} años")
+
+estudiante.agregar_nota(85)
+estudiante.agregar_nota(90)
+estudiante.agregar_nota(78)
+print(f"Promedio de calificaciones: {estudiante.calcular_promedio()}")
