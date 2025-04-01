@@ -1,0 +1,51 @@
+class CuentaBancaria:
+    def __init__(self, titular: str, saldo: float):
+        if saldo < 0:
+            raise ValueError("No es posible iniciar la cuenta con un saldo negativo.")
+        self.__titular = titular
+        self.__saldo = saldo
+    
+    def depositar(self, monto: float):
+        """Añade fondos a la cuenta bancaria."""
+        if monto <= 0:
+            raise ValueError("El monto a ingresar debe ser positivo.")
+        self.__saldo += monto
+    
+    def retirar(self, monto: float):
+        """Extrae dinero de la cuenta si hay saldo suficiente."""
+        if monto <= 0:
+            raise ValueError("El monto a extraer debe ser positivo.")
+        if monto > self.__saldo:
+            raise ValueError("Saldo insuficiente para completar la operación.")
+        self.__saldo -= monto
+    
+    def obtener_saldo(self) -> float:
+        """Devuelve el saldo disponible en la cuenta."""
+        return self.__saldo
+    
+    def obtener_titular(self) -> str:
+        """Muestra el nombre del titular de la cuenta."""
+        return self.__titular
+
+class CuentaAhorro(CuentaBancaria):
+    def __init__(self, titular: str, saldo: float, interes_anual: float):
+        super().__init__(titular, saldo)
+        if interes_anual < 0:
+            raise ValueError("El interés anual no puede ser un valor negativo.")
+        self.__interes_anual = interes_anual
+    
+    def aplicar_interes(self):
+        """Calcula y agrega el interés anual al saldo de la cuenta."""
+        nuevo_saldo = self.obtener_saldo() * (1 + self.__interes_anual / 100)
+        self.depositar(nuevo_saldo - self.obtener_saldo())
+    
+    def obtener_interes_anual(self) -> float:
+        """Devuelve el porcentaje de interés anual aplicado a la cuenta."""
+        return self.__interes_anual
+
+# Ejemplo de uso
+cuenta = CuentaAhorro("Carlos Pérez", 1000, 5)
+print(f"Titular: {cuenta.obtener_titular()}, Saldo: ${cuenta.obtener_saldo()}, Interés anual: {cuenta.obtener_interes_anual()}%")
+
+cuenta.aplicar_interes()
+print(f"Saldo tras aplicar el interés: ${cuenta.obtener_saldo()}")
