@@ -1,0 +1,24 @@
+class Estudiante:
+    
+    def __init__(self, nombre, apellido, calificacion):
+        self.nombre = nombre 
+        self.apellido = apellido 
+        self.calificacion = float(calificacion)
+print("-------------")
+estudiante1 = Estudiante("Maryoli", "Fontalvo", "4.5")
+estudiante2 = Estudiante("Suge", "Hernandez", "5.0")
+estudiante3 = Estudiante("Nani", "Colpas", "2.9")
+
+estudiantes = [estudiante1, estudiante2, estudiante3]
+
+for estudiante in estudiantes: 
+    print(f"Nombre: {estudiante.nombre}")
+    print(f"Apellido: {estudiante.apellido}")
+    print(f"Calificación: {estudiante.calificacion}")
+    
+    if estudiante.calificacion >= 3.0:
+        print("Aprobado")
+    else:
+        print("Reprobado")
+    
+    print("-------------"
