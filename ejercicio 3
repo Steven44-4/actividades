@@ -1,0 +1,51 @@
+class Producto:
+    def _init_(self, nombre, precio, stock):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def verificar_disponibilidad(self, cantidad):
+        return self.stock >= cantidad
+
+    def vender(self, cantidad):
+        if self.verificar_disponibilidad(cantidad):
+            self.stock -= cantidad
+            print(f"Venta exitosa: {cantidad} unidades vendidas.")
+        else:
+            print("No hay suficiente stock para realizar la venta.")
+
+    def reabastecer(self, cantidad):
+        self.stock += cantidad
+        print(f"Producto reabastecido con {cantidad} unidades.")
+
+    def mostrar_estado(self):
+        print(f"Producto: {self.nombre}, Precio: {self.precio}, Stock disponible: {self.stock}")
+
+
+# Crear objeto con valores iniciales
+producto = Producto("Laptop", 1200, 10)
+
+# Realizar operaciones según el enunciado
+print("1. Verificar si hay 5 unidades disponibles:")
+print(producto.verificar_disponibilidad(5))  # True
+
+print("2. Vender 3 unidades:")
+producto.vender(3)
+producto.mostrar_estado()
+
+print("3. Verificar si hay 8 unidades disponibles:")
+print(producto.verificar_disponibilidad(8))  # False
+
+print("4. Intentar vender 8 unidades:")
+producto.vender(8)  # Debería fallar
+
+print("5. Reabastecer con 10 unidades:")
+producto.reabastecer(10)
+producto.mostrar_estado()
+
+print("6. Verificar si hay 8 unidades disponibles:")
+print(producto.verificar_disponibilidad(8))  # True
+
+print("7. Vender 8 unidades:")
+producto.vender(8)
+producto.mostrar_estado()
